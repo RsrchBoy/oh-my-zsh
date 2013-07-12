@@ -43,9 +43,8 @@ ZSH_THEME_RVM_PROMPT_SUFFIX="›%{$reset_color%}"
 #ZSH_THEME_GIT_PROMPT_CLEAN="%{$FG[040]%}✔ %{$reset_color%}"
 #ZSH_THEME_GIT_PROMPT_DIRTY="%{$FG[202]%}✘ %{$reset_color%}"
 #ZSH_THEME_GIT_PROMPT_CLEAN=""
-#ZSH_THEME_GIT_PROMPT_CLEAN=" %{$reset_color%}%{$fg[green]%}✔ // %{$FG[040]%}✔ %{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%} ✔"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%} ±"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$reset_color%}%{$fg[green]%}✔%{$_is%} with %{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$reset_color%}%{$fg[red]%}±%{$_is%} with "
 ZSH_THEME_GIT_PROMPT_PREFIX="\n| %{$fg[blue]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} %{$_is%}with "
 
@@ -82,6 +81,15 @@ function _tracking_upstream {
     echo "$(command git rev-parse --verify @{upstream} --symbolic-full-name 2>/dev/null)"
 }
 
+function perl_setup {
+
+    # we assume perlbrew and local::lib, but don't check for too much else.
+
+    if [ "x$PERL_LOCAL_LIB_ROOT" != "x" ] ; then
+        print -P ' %{$_is%}and %{$fg[cyan]%}local::lib at' $PERL_LOCAL_LIB_ROOT
+    fi
+}
+
 #local tracking="$(git rev-parse --verify @{upstream} --symbolic-full-name 2>/dev/null)"
 local tracking='$(_tracking_upstream)'
 
@@ -89,17 +97,20 @@ local   git_info='$(git_prompt_info)'
 local git_status='$(git_prompt_status)'
 local git_remote_status='%{$reset_color%}$(git_remote_status)'
 local   rvm_info='$(rvm_prompt_info)'
+local perl_gen_info='$(perl_setup)'
 
 local git_tracking=" %{$_is%}tracking %{$fg[cyan]%}$tracking"
 
 local user_info="%{$FG[040]%}%n%{$reset_color%} %{$_is%}at%{$reset_color%} %{$FG[033]%}%m%{$reset_color%}"
 local path_info="%{$_is%}in%{$reset_color%} %{$terminfo[bold]$FG[226]%}%~%{$reset_color%}"
 local jobs_info="%{$_is%}with %{$fg[green]%}%j job(s)%{$reset_color%}"
-local perl_info="%{$_is%}using %{$fg[cyan]%}system perl%{$reset_color%}"
+local perl_info="%{$_is%}using %{$fg[cyan]%}system perl"
+
+
 
 # the actual prompt :)
 PROMPT="
-╭─$user_info $path_info $jobs_info $perl_info$rvm_info$git_info$git_status$git_remote_status$git_tracking%{$reset_color%}
+╭─$user_info $path_info $jobs_info $perl_info$perl_gen_info$rvm_info$git_info$git_status$git_remote_status$git_tracking%{$reset_color%}
 ╰─(%~)>> "
 #|  $git_info %{$_is%}=> %{$reset_color%}%{$fg[purple]%}$tracking%{$reset_color%}
 #╭─%{$FG[040]%}%n%{$reset_color%} %{$_is%}at%{$reset_color%} %{$FG[033]%}%m%{$reset_color%} %{$FG[239]%}in%{$reset_color%} %{$terminfo[bold]$FG[226]%}%~%{$reset_color%}$jobs_info$rvm_info
