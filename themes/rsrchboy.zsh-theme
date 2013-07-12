@@ -43,10 +43,11 @@ ZSH_THEME_RVM_PROMPT_SUFFIX="›%{$reset_color%}"
 #ZSH_THEME_GIT_PROMPT_CLEAN="%{$FG[040]%}✔ %{$reset_color%}"
 #ZSH_THEME_GIT_PROMPT_DIRTY="%{$FG[202]%}✘ %{$reset_color%}"
 #ZSH_THEME_GIT_PROMPT_CLEAN=""
-ZSH_THEME_GIT_PROMPT_CLEAN=" %{$reset_color%}// %{$FG[040]%}✔ %{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY=""
+#ZSH_THEME_GIT_PROMPT_CLEAN=" %{$reset_color%}%{$fg[green]%}✔ // %{$FG[040]%}✔ %{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%} ✔"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%} ±"
 ZSH_THEME_GIT_PROMPT_PREFIX="\n| %{$fg[blue]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} // "
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} %{$_is%}with "
 
 #ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%} ✖ deleted,"
 #ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[blue]%} ± modified%{$_is%},"
@@ -89,7 +90,7 @@ local git_status='$(git_prompt_status)'
 local git_remote_status='%{$reset_color%}$(git_remote_status)'
 local   rvm_info='$(rvm_prompt_info)'
 
-local git_tracking="%{$fg[cyan]%}$tracking"
+local git_tracking=" %{$_is%}tracking %{$fg[cyan]%}$tracking"
 
 local user_info="%{$FG[040]%}%n%{$reset_color%} %{$_is%}at%{$reset_color%} %{$FG[033]%}%m%{$reset_color%}"
 local path_info="%{$_is%}in%{$reset_color%} %{$terminfo[bold]$FG[226]%}%~%{$reset_color%}"
