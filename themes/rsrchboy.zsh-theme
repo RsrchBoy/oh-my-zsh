@@ -69,10 +69,14 @@ ZSH_THEME_GIT_PROMPT_DIVERGED_REMOTE="// %{$fg_bold[magenta]%}↕ should rebase%
 ZSH_THEME_GIT_PROMPT_SHA_BEFORE=" %{$WHITE%}[%{$YELLOW%}"
 ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$WHITE%}]"
 
+# Format for git_prompt_long_sha() and git_prompt_short_sha()
+ZSH_THEME_GIT_PROMPT_TRACKING_BEFORE="  %{$_is%}tracking %{$fg[cyan]%}"
+ZSH_THEME_GIT_PROMPT_TRACKING_AFTER="%{$reset_color%}"
+
 # 1}}}
 
 #local tracking='${$(command git rev-parse --verify @{upstream} --symbolic-full-name 2>/dev/null)/^refs\//}'
-function _tracking_upstream {
+function git_upstream_tracking {
     echo "$(command git rev-parse --verify @{upstream} --symbolic-full-name 2>/dev/null)"
 }
 
@@ -94,7 +98,7 @@ local git_remote_status='%{$reset_color%}$(git_remote_status)'
 local   rvm_info='$(rvm_prompt_info)'
 local perl_gen_info='$(perl_setup)'
 
-local git_tracking=" %{$_is%}tracking %{$fg[cyan]%}$tracking"
+local git_tracking_info='$(git_upstream_tracking)'
 
 local user_info="%{$FG[040]%}%n%{$reset_color%} %{$_is%}at%{$reset_color%} %{$FG[033]%}%m%{$reset_color%}"
 local path_info="%{$_is%}in%{$reset_color%} %{$terminfo[bold]$FG[226]%}%~%{$reset_color%}"
