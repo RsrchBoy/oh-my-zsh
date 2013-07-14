@@ -1,14 +1,9 @@
-# Fino theme by Max Masnick (http://max.masnick.me)
 # /* vim: set foldmethod=marker : */
 
-# Use with a dark background and 256-color terminal!
-# Meant for people with RVM and git. Tested only on OS X 10.7.
+# Originally based on the Fino theme by Max Masnick (http://max.masnick.me)
 
-# Borrowing shamelessly from these oh-my-zsh themes:
-#   bira
-#   robbyrussell
-#
-# Also borrowing from http://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
+# Use with a dark background and 256-color terminal!
+# Meant for people with Perl, RVM (maybe?) and git.
 
 #autoload -U add-zsh-hook
 #add-zsh-hook chpwd prompt_chpwd # update remotes only when changing dir
