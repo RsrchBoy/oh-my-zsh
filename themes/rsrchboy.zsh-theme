@@ -37,12 +37,14 @@ ZSH_THEME_RVM_PROMPT_SUFFIX="›%{$reset_color%}"
 #ZSH_THEME_GIT_PROMPT_CLEAN="%{$FG[040]%}✔ %{$reset_color%}"
 #ZSH_THEME_GIT_PROMPT_DIRTY="%{$FG[202]%}✘ %{$reset_color%}"
 #ZSH_THEME_GIT_PROMPT_CLEAN=""
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}\n| %{$fg[blue]%}"
+#ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}\n| %{$fg[blue]%}"
+ZSH_THEME_GIT_PROMPT_PREFIX=" "
 #ZSH_THEME_GIT_PROMPT_CLEAN="%{$reset_color%}%{$fg[green]%}✔%{$_is%} with %{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$reset_color%}%{$fg[green]%}✔%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}✔%{$reset_color%}"
 #ZSH_THEME_GIT_PROMPT_DIRTY="%{$reset_color%}%{$fg[red]%}±%{$_is%} with "
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$reset_color%}%{$fg[red]%}±"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} %{$_is%}with "
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}±"
+#ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} %{$_is%}with "
+ZSH_THEME_GIT_PROMPT_SUFFIX=" "
 
 #ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%} ✖ deleted,"
 #ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[blue]%} ± modified%{$_is%},"
@@ -59,9 +61,9 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%}? "
 #ZSH_THEME_GIT_PROMPT_AHEAD=" %{$fg[red]%}(!)%{$_is%}"
 #ZSH_THEME_GIT_PROMPT_BEHIND=" %{$fg[red]%}(!)%{$_is%}"
 #ZSH_THEME_GIT_PROMPT_DIVERGED=" %{$fg[red]%}(!)%{$_is%}"
-ZSH_THEME_GIT_PROMPT_AHEAD_REMOTE="%{$_is%}and %{$fg[magenta]%}↑ should push %{$_is%}to%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_BEHIND_REMOTE="// %{$fg_bold[magenta]%}↓ should pull%{$reset_color%} //"
-ZSH_THEME_GIT_PROMPT_DIVERGED_REMOTE="// %{$fg_bold[magenta]%}↕ should rebase%{$reset_color%} //"
+ZSH_THEME_GIT_PROMPT_AHEAD_REMOTE="%{$_is%}and %{$fg[magenta]%}↑ should push %{$_is%}to%{$reset_color%} "
+ZSH_THEME_GIT_PROMPT_BEHIND_REMOTE="%{$_is%}and %{$fg_bold[magenta]%}↓ should pull%{$reset_color%} "
+ZSH_THEME_GIT_PROMPT_DIVERGED_REMOTE="%{$_is%}and %{$fg_bold[magenta]%}↕ should rebase%{$reset_color%} "
 
 # Format for git_prompt_ahead()
 #ZSH_THEME_GIT_PROMPT_AHEAD=" %{$fg[red]%}(!)%{$_is%}"
@@ -132,6 +134,7 @@ local git_tracking_info='$(git_upstream_tracking)'
 local rvm_info='$(rvm_prompt_info)'
 local user_info="%{$FG[040]%}%n%{$reset_color%} %{$_is%}at%{$reset_color%} %{$FG[033]%}%m%{$reset_color%}"
 local path_info="%{$_is%}in%{$reset_color%} %{$terminfo[bold]$FG[226]%}%~%{$reset_color%}"
+local git_info1="%{$reset_color%}%{$terminfo[bold]$FG[226]%}$git_info%{$reset_color%}"
 local jobs_info="%{$_is%}with %{$fg[red]%}%j job%(2j.s.)%{$reset_color%}"
 jobs_info=" %(1j.$jobs_info .)"
 local perl_info='$(perl_prompt_info)'
@@ -140,7 +143,7 @@ local user_info2="%{$FG[040]%}%n%{$reset_color%}%{$fg[brown]%}@%{$FG[033]%}%m%{$
 
 # the actual prompt :)
 PROMPT="
-╭─$user_info $path_info$jobs_info$perl_info$rvm_info$git_info$git_status$git_remote_status$git_tracking%{$reset_color%}
+╭─$git_info1$git_status$git_remote_status$git_tracking$jobs_info$perl_info$rvm_info%{$reset_color%}
 ╰─($user_info2)─%(!.$fg_bold[red]PRIV.)>> %{$reset_color%}"
 #╰─%(!.%{$fg_bold[red]%}.)(%n@%m:%~)>> %{$reset_color%}"
 #╰─(%n@%(!.%{$fg_bold[red]%}.%{$FG[033]%})%m:%~)>> %{$reset_color%}"
