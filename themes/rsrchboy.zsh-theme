@@ -70,7 +70,7 @@ ZSH_THEME_GIT_PROMPT_DIVERGED_REMOTE="%{$_is%}and %{$fg_bold[magenta]%}↕ shoul
 
 # Format for git_prompt_long_sha() and git_prompt_short_sha()
 ZSH_THEME_GIT_PROMPT_SHA_BEFORE=" %{$WHITE%}[%{$YELLOW%}"
-ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$WHITE%}]"
+ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$WHITE%}]|"
 
 # Format for git_prompt_long_sha() and git_prompt_short_sha()
 ZSH_THEME_GIT_PROMPT_TRACKING_BEFORE="  %{$_is%}tracking %{$fg[cyan]%}"
@@ -134,7 +134,7 @@ local git_short_sha='$(git_prompt_short_sha)'
 local rvm_info='$(rvm_prompt_info)'
 local user_info="%{$FG[040]%}%n%{$reset_color%} %{$_is%}at%{$reset_color%} %{$FG[033]%}%m%{$reset_color%}"
 local path_info="%{$_is%}in%{$reset_color%} %{$terminfo[bold]$FG[226]%}%~%{$reset_color%}"
-local git_info1="%{$reset_color%}%{$terminfo[bold]$FG[226]%}$git_short_sha|$git_info%{$reset_color%}"
+local git_info1="%{$reset_color%}%{$terminfo[bold]$FG[226]%}$git_short_sha$git_info%{$reset_color%}"
 local jobs_info="%{$_is%}with %{$fg[red]%}%j job%(2j.s.)%{$reset_color%}"
 jobs_info=" %(1j.$jobs_info .)"
 local perl_info='$(perl_prompt_info)'
