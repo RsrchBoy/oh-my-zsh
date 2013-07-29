@@ -38,7 +38,7 @@ ZSH_THEME_RVM_PROMPT_SUFFIX="›%{$reset_color%}"
 #ZSH_THEME_GIT_PROMPT_DIRTY="%{$FG[202]%}✘ %{$reset_color%}"
 #ZSH_THEME_GIT_PROMPT_CLEAN=""
 #ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}\n| %{$fg[blue]%}"
-ZSH_THEME_GIT_PROMPT_PREFIX=" "
+ZSH_THEME_GIT_PROMPT_PREFIX=""
 #ZSH_THEME_GIT_PROMPT_CLEAN="%{$reset_color%}%{$fg[green]%}✔%{$_is%} with %{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}✔%{$reset_color%}"
 #ZSH_THEME_GIT_PROMPT_DIRTY="%{$reset_color%}%{$fg[red]%}±%{$_is%} with "
@@ -77,7 +77,6 @@ ZSH_THEME_GIT_PROMPT_TRACKING_BEFORE="  %{$_is%}tracking %{$fg[cyan]%}"
 ZSH_THEME_GIT_PROMPT_TRACKING_AFTER="%{$reset_color%}"
 
 # 1}}}
-# Format for git_prompt_long_sha() and git_prompt_short_sha()
 ZSH_THEME_GIT_PROMPT_TRACKING_BEFORE="  %{$_is%}tracking %{$fg[cyan]%}"
 ZSH_THEME_GIT_PROMPT_TRACKING_AFTER="%{$reset_color%}"
 
@@ -130,11 +129,12 @@ local git_status='$(git_prompt_status)'
 local git_remote_status='%{$reset_color%}$(git_remote_status)'
 
 local git_tracking_info='$(git_upstream_tracking)'
+local git_short_sha='$(git_prompt_short_sha)'
 
 local rvm_info='$(rvm_prompt_info)'
 local user_info="%{$FG[040]%}%n%{$reset_color%} %{$_is%}at%{$reset_color%} %{$FG[033]%}%m%{$reset_color%}"
 local path_info="%{$_is%}in%{$reset_color%} %{$terminfo[bold]$FG[226]%}%~%{$reset_color%}"
-local git_info1="%{$reset_color%}%{$terminfo[bold]$FG[226]%}$git_info%{$reset_color%}"
+local git_info1="%{$reset_color%}%{$terminfo[bold]$FG[226]%}$git_short_sha|$git_info%{$reset_color%}"
 local jobs_info="%{$_is%}with %{$fg[red]%}%j job%(2j.s.)%{$reset_color%}"
 jobs_info=" %(1j.$jobs_info .)"
 local perl_info='$(perl_prompt_info)'
