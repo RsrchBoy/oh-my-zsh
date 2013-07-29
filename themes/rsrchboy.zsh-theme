@@ -143,7 +143,7 @@ local user_info2="%{$FG[040]%}%n%{$reset_color%}%{$fg[brown]%}@%{$FG[033]%}%m%{$
 
 # the actual prompt :)
 PROMPT="
-╭─$git_info1$git_status$git_remote_status$git_tracking$jobs_info$perl_info$rvm_info%{$reset_color%}
+╭─$git_info1$git_status$git_remote_status$git_tracking_info$jobs_info$perl_info$rvm_info%{$reset_color%}
 ╰─($user_info2)─%(!.$fg_bold[red]PRIV.)>> %{$reset_color%}"
 #╰─%(!.%{$fg_bold[red]%}.)(%n@%m:%~)>> %{$reset_color%}"
 #╰─(%n@%(!.%{$fg_bold[red]%}.%{$FG[033]%})%m:%~)>> %{$reset_color%}"
