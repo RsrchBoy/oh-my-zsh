@@ -113,7 +113,7 @@ git_prompt_status() {
   if $(echo "$INDEX" | grep '^## .*diverged' &> /dev/null); then
     STATUS="$ZSH_THEME_GIT_PROMPT_DIVERGED$STATUS"
   fi
-  echo $STATUS
+  [ -z $STATUS ] || echo "$ZSH_THEME_GIT_PROMPT_STATUS_PREFIX$STATUS$ZSH_THEME_GIT_PROMPT_STATUS_SUFFIX"
 }
 
 #compare the provided version of git to the version installed and on path
