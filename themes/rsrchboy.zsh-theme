@@ -47,11 +47,13 @@ ZSH_THEME_PERL_PROMPT_SUFFIX=""
 #ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}\n| %{$fg[blue]%}"
 ZSH_THEME_GIT_PROMPT_PREFIX=""
 #ZSH_THEME_GIT_PROMPT_CLEAN="%{$reset_color%}%{$fg[green]%}✔%{$_is%} with %{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}✔%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="$fg_bold[green]✔"
 #ZSH_THEME_GIT_PROMPT_DIRTY="%{$reset_color%}%{$fg[red]%}±%{$_is%} with "
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}±"
+ZSH_THEME_GIT_PROMPT_DIRTY="$reset_color$fg_bold[red]±"
 #ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} %{$_is%}with "
-ZSH_THEME_GIT_PROMPT_SUFFIX="$ZSH_THEME_SEP"
+#ZSH_THEME_GIT_PROMPT_SUFFIX="$ZSH_THEME_SEP"
+
+ZSH_THEME_GIT_PROMPT_SUFFIX="$reset_color"
 
 #ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%} ✖ deleted,"
 #ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[blue]%} ± modified%{$_is%},"
@@ -79,8 +81,10 @@ ZSH_THEME_GIT_PROMPT_DIVERGED_REMOTE="%{$fg_bold[magenta]%}↕ should rebase%{$r
 #ZSH_THEME_GIT_PROMPT_AHEAD=" %{$fg[red]%}(!)%{$_is%}"
 
 # Format for git_prompt_long_sha() and git_prompt_short_sha()
-ZSH_THEME_GIT_PROMPT_SHA_BEFORE="%{$WHITE%}[%{$YELLOW%}"
-ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$WHITE%}]|"
+#ZSH_THEME_GIT_PROMPT_SUFFIX="$fg[white]@"
+#ZSH_THEME_GIT_PROMPT_SHA_BEFORE="$fg[white]{$fg[magenta]"
+ZSH_THEME_GIT_PROMPT_SHA_BEFORE="$_is at "
+ZSH_THEME_GIT_PROMPT_SHA_AFTER="$ZSH_THEME_SEP"
 #ZSH_THEME_GIT_PROMPT_SHA_BEFORE="["
 #ZSH_THEME_GIT_PROMPT_SHA_AFTER="]|"
 
@@ -109,7 +113,7 @@ local rvm_info='$(rvm_prompt_info)'
 
 local user_info="%{$FG[040]%}%n%{$reset_color%} %{$_is%}at%{$reset_color%} %{$FG[033]%}%m%{$reset_color%}"
 #local path_info="%{$_is%}in%{$reset_color%} %{$terminfo[bold]$FG[226]%}%~%{$reset_color%}"
-local git_info1="%{$reset_color%}%{$terminfo[bold]$FG[226]%}$git_short_sha$git_info%{$reset_color%}"
+local git_info1="%{$reset_color%}%{$terminfo[bold]$FG[226]%}$git_info$git_short_sha%{$reset_color%}"
 
 local jobs_info="%(1j.$fg[red]%j job%(2j.s.)$ZSH_THEME_SEP.)"
 
