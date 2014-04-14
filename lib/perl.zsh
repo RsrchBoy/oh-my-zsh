@@ -1,7 +1,12 @@
 # oh-my-zsh library helper file for Perl prompts and the like
+#
+# Chris Weyl <rsrchboy@cpan.org> 2014
 
 ZSH_THEME_PERL_PROMPT_PREFIX=""
 ZSH_THEME_PERL_PROMPT_SUFFIX=""
+
+ZSH_THEME_PERL_PROMPT_SYSTEM_PERL="system perl"
+ZSH_THEME_PERL_PROMPT_LIB_SYMBOL="@"
 
 function perl_prompt_info {
 
@@ -24,29 +29,36 @@ function perl_prompt_info {
     #PERL_LOCAL_LIB_ROOT=/home/rsrchboy/.perlbrew/libs/perl-5.16.2@trunk
     #PERL5LIB=/home/rsrchboy/.perlbrew/libs/perl-5.16.2@trunk/lib/perl5
 
-    # we assume perlbrew and local::lib, but don't check for too much else.
+    # NOTE: We assume perlbrew and local::lib, but don't check for too much
+    # else. If we're not using a perlbrew'ed perl, then we assume we're using
+    # the system perl.  We also do not currently check for additional
+    # local::lib's being used concurrently within a perlbrew environment.
 
-    # XXX: NOT FINISHED!
-    # TODO: needs determination of *where* perl is if not /usr/bin/perl, as that's not system perl
-    #
-
-    #PSTAT=''
+    local PSTAT
 
     if [ -z $PERLBREW_PERL ] ; then
-        PSTAT="system-perl"
+
+        # we're using the system perl
+        PSTAT="$ZSH_THEME_PERL_PROMPT_SYSTEM_PERL"
+
         if [ $PERL_LOCAL_LIB_ROOT ] ; then
-            PSTAT="$PSTAT@${PERL_LOCAL_LIB_ROOT/#:$HOME/~}"
+            # ...with a local::lib library
+            PSTAT="$PSTAT$ZSH_THEME_PERL_PROMPT_LIB_SYMBOL${PERL_LOCAL_LIB_ROOT/#:$HOME/~}"
         fi
+
     elif [ $PERLBREW_PERL ] ; then
+
+        # we're using a perlbrew'ed perl
         PSTAT="$PERLBREW_PERL"
+
         if [ $PERLBREW_LIB ] ; then
-            PSTAT="$PSTAT@$PERLBREW_LIB"
+            # ...with a perlbrew library
+            PSTAT="$PSTAT$ZSH_THEME_PERL_PROMPT_LIB_SYMBOL$PERLBREW_LIB"
         fi
-    elif [ $PERL_LOCAL_LIB_ROOT ] ; then
-        #echo ' %{$_is%}and %{$fg[cyan]%}local::lib at' $PERL_LOCAL_LIB_ROOT
     fi
 
     # only print if we actually have anything interesting to print
-    test ! -z "$PSTAT" && echo "$ZSH_THEME_PERL_PROMPT_PREFIX$PSTAT$ZSH_THEME_PERL_PROMPT_SUFFIX"
+    test -n "$PSTAT" && echo "$ZSH_THEME_PERL_PROMPT_PREFIX$PSTAT$ZSH_THEME_PERL_PROMPT_SUFFIX"
 }
 
+# fin...
