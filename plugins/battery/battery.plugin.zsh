@@ -67,13 +67,16 @@ if [[ $(uname) == "Darwin" ]] ; then
 elif [[ $(uname) == "Linux"  ]] ; then
 
   function battery_is_charging() {
-    ! [[ $(acpi 2&>/dev/null | grep -c '^Battery.*Discharging') -gt 0 ]]
+    #! [[ $(acpi 2&>/dev/null | grep -c '^Battery.*Discharging') -gt 0 ]]
+    #${$(cat /sys/class/power_supply/BAT0/status})stat
+    [ ${$(cat /sys/class/power_supply/BAT0/status):#/Discharg/} ]
   }
 
   function battery_pct() {
-    if (( $+commands[acpi] )) ; then
-      echo "$(acpi | cut -f2 -d ',' | tr -cd '[:digit:]')"
-    fi
+    #if (( $+commands[acpi] )) ; then
+      #echo "$(acpi | cut -f2 -d ',' | tr -cd '[:digit:]')"
+    #fi
+    cat /sys/class/power_supply/BAT0/capacity
   }
 
   function battery_pct_remaining() {
