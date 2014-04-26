@@ -396,7 +396,7 @@ function build_prompt() {
   echo -n "╰"
 
   prompt_segment black 226 "${vcs_info_msg_3_:-%B${PWD/#$HOME/~}%b}"
-  prompt_segment black default "%(?.%{%F{green}%}$iOK .%{%F{red}%}$iFROWN )"
+  prompt_segment black default "%(?.%{%F{green}%}$iOK.%{%F{red}%}$iFROWN)"
   echo -n "%B%(!.%{%F{red}%}.)$iSUFFIX%b%{%f%} "
 }
 
