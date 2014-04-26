@@ -356,32 +356,6 @@ function prompt_context() {
   fi
 }
 
-### prompt_status()
-
-# - was there an error
-# - am I root
-# - are there background jobs?
-function prompt_status() {
-  local symbols
-
-  symbols=()
-  symbols+=$SEGMENT_SEPARATOR_BEGIN
-  symbols+="%(1j.%{%F{cyan}%}${iJOB} .)"
-  symbols+="%{%F{white}%}$iPOWER $POWER_SUPPLY_CAPACITY%% %{%F{default}%}"
-  symbols+="%(!.%{%F{red}%}%B$iROOT%b .)"
-  symbols+="%(?..%{%F{red}%}$iFROWN )"
-  #symbols+=$SEGMENT_SEPARATOR_END
-
-  echo -n "${(j::)symbols}"
-}
-
-### prompt_char()
-function prompt_char {
-  git branch >/dev/null 2>/dev/null && echo "±±±" && return
-  #echo '%B»%b'
-  echo ''
-}
-
 ### Virtualenv: current working virtualenv
 prompt_virtualenv() {
   local virtualenv_path="$VIRTUAL_ENV"
@@ -408,19 +382,22 @@ function build_prompt() {
   echo -n "╭"
   prompt_context
   prompt_segment black magenta "${vcs_info_msg_0_}"
-  prompt_segment black blue "${vcs_info_msg_2_}"
-  prompt_segment black green "$(perl_prompt_info)"
-  prompt_segment black yellow "${vcs_info_msg_1_}"
+  prompt_segment black blue    "${vcs_info_msg_2_}"
+  prompt_segment black white   "$iPOWER $POWER_SUPPLY_CAPACITY%%"
+  prompt_segment black white   "%(1j.%{%F{cyan}%}${iJOB} x%j.)"
+  prompt_segment black green   "$(perl_prompt_info)"
+  prompt_segment black yellow  "${vcs_info_msg_1_}"
   # FIXME rbenv segment is **too slow!**
   #prompt_segment black blue "$(rbenv_prompt_info)"
   prompt_virtualenv
+  # FIXME battery/power bits are slow, and defunct on my machine
   #echo -n "$SEGMENT_SEPARATOR_BEGIN$(battery_level_gauge)$SEGMENT_SEPARATOR_END"
   echo
   echo -n "╰"
 
   prompt_segment black 226 "${vcs_info_msg_3_:-%B${PWD/#$HOME/~}%b}"
-  prompt_status
-  echo -n "%B$iSUFFIX%b "
+  prompt_segment black default "%(?.%{%F{green}%}$iOK .%{%F{red}%}$iFROWN )"
+  echo -n "%B%(!.%{%F{red}%}.)$iSUFFIX%b%{%f%} "
 }
 
 function build_rprompt() {
