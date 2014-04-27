@@ -67,6 +67,10 @@ iPERL="\u${CODEPOINT_OF_AWESOME_COFFEE}"
 
 iSUFFIX="\u${CODEPOINT_OF_AWESOME_DOUBLE_ANGLE_RIGHT}"
 
+# sooo lazy...
+iA=$SEGMENT_SEPARATOR_BEGIN
+iZ="%{%F{default}%}$SEGMENT_SEPARATOR_END"
+
 ### segment vars {{{
 
 CURRENT_BG='NONE'
@@ -384,7 +388,7 @@ function build_prompt() {
   prompt_segment black magenta "${vcs_info_msg_0_}"
   prompt_segment black blue    "${vcs_info_msg_2_}"
   prompt_segment black white   "$iPOWER $POWER_SUPPLY_CAPACITY%%"
-  prompt_segment black white   "%(1j.%{%F{cyan}%}${iJOB} x%j.)"
+  echo -n                      "%(1j.$iA%{%F{cyan}%}${iJOB} x%j$iZ.)"
   prompt_segment black green   "$(perl_prompt_info)"
   prompt_segment black yellow  "${vcs_info_msg_1_}"
   # FIXME rbenv segment is **too slow!**
