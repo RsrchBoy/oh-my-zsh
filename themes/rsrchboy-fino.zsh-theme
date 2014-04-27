@@ -412,4 +412,7 @@ function build_rprompt() {
 PROMPT='$(build_prompt)'
 #RPROMPT='$(build_rprompt)n'
 
-# vim: set fdc=5 fdm=expr foldexpr=FoldOnLeadingPounds(v:lnum) :
+# 1}}}
+
+
+# vim: set fdc=5 fdm=marker :
