@@ -350,7 +350,7 @@ function +vi-git-assemble() {
 #
 # Each component will draw itself, and hide itself if no information needs to be shown
 
-### Context: user@hostname (who am I and where am I)
+### Context: user@hostname (who am I and where am I) {{{2
 function prompt_context() {
   local user=`whoami`
 
@@ -360,7 +360,7 @@ function prompt_context() {
   fi
 }
 
-### Virtualenv: current working virtualenv
+### Virtualenv: current working virtualenv {{{2
 prompt_virtualenv() {
   local virtualenv_path="$VIRTUAL_ENV"
   if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
@@ -368,7 +368,7 @@ prompt_virtualenv() {
   fi
 }
 
-# }}}
+# }}}1
 
 #*
 
