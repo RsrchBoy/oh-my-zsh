@@ -64,6 +64,7 @@ iPOWER="\u${CODEPOINT_OF_AWESOME_OFF}"
 iPOWER_UP="\u${CODEPOINT_OF_AWESOME_OFF}"
 iPOWER_DOWN="\u${CODEPOINT_OF_AWESOME_OFF}"
 iPERL="\u${CODEPOINT_OF_AWESOME_COFFEE}"
+iRUBY="\u${CODEPOINT_OF_OCTICONS_RUBY}"
 
 iSUFFIX="\u${CODEPOINT_OF_AWESOME_DOUBLE_ANGLE_RIGHT}"
 
@@ -368,6 +369,17 @@ prompt_virtualenv() {
   fi
 }
 
+### rbenv info: {{{2
+
+prompt_rubyenv() {
+  local rbenv="${$(<~/.rbenv/version):-system (global)}"
+  #local rbenv="${rbenv:-system (global)}"
+
+  rbenv="${${RBENV_VERSION:+$RBENV_VERSION (shell)}:-$rbenv}"
+
+  prompt_segment black yellow "${rbenv:+$iRUBY  $rbenv}"
+}
+
 # }}}1
 
 #*
@@ -388,8 +400,12 @@ function build_prompt() {
   prompt_segment black magenta "${vcs_info_msg_0_}"
   prompt_segment black blue    "${vcs_info_msg_2_}"
   prompt_segment black white   "$iPOWER $POWER_SUPPLY_CAPACITY%%"
-  echo -n                      "%(1j.$iA%{%F{cyan}%}${iJOB} x%j$iZ.)"
   prompt_segment black green   "$(perl_prompt_info)"
+  #prompt_segment black magenta "ruby: ${$(<~/.rbenv/version):-system}"
+  #local rbenv="${$(<~/.rbenv/version):-system (global)}"
+  #local rbenv="${rbenv:-system (global)}"
+  prompt_rubyenv
+  # local goes here
   prompt_segment black yellow  "${vcs_info_msg_1_}"
   # FIXME rbenv segment is **too slow!**
   #prompt_segment black blue "$(rbenv_prompt_info)"
@@ -400,8 +416,9 @@ function build_prompt() {
   echo -n "╰"
 
   prompt_segment black 226 "${vcs_info_msg_3_:-%B${PWD/#$HOME/~}%b}"
-  prompt_segment black default "%(?.%{%F{green}%}$iOK.%{%F{red}%}$iFROWN)"
-  echo -n "%B%(!.%{%F{red}%}.)$iSUFFIX%b%{%f%} "
+  echo -n                  "%(1j.$iA%{%F{cyan}%}${iJOB}%(2j. x%j.)$iZ.)"
+  echo -n                  "$iA%(?.%{%F{green}%}$iOK.%{%F{red}%}$iFROWN)$iZ"
+  echo -n "%B%(!.%{%F{red}%}.) $iSUFFIX%b%{%f%} "
 }
 
 function build_rprompt() {
