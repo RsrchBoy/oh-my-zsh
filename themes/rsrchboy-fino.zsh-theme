@@ -335,8 +335,14 @@ function +vi-git-assemble() {
 
         # make our branch look all purdy
         if [ "$user_data[remote_full]" ] ; then
+
+            # local branch, remote host type (FIXME), remote name
             hook_com[branch]="$hook_com[branch_orig]:$iGITHUB $user_data[remote_origin]"
-            hook_com[branch]+="${user_data[remote_branch]%%$hook_com[branch_orig]}"
+
+            # only show the remote branch name iff != local branch name (sans
+            # the remotes/... prefix)
+            local rb_desc="${user_data[remote_branch]%%$hook_com[branch_orig]}"
+            hook_com[branch]+="${rb_desc:+/}$rb_desc"
         fi
         #[[ user_data[remote_branch]="${#*/}"
         [ "$user_data[branch_variance]" ] &&
