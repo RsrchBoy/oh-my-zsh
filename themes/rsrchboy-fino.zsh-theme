@@ -281,13 +281,8 @@ function +vi-git-remotebranch() {
     [ $user_data[vi_git_remotebranch] ] && return
     user_data[vi_git_remotebranch]=1
 
-    #echo "here: $(pwd)" >&2
-
-    local remote
-
-    # Are we on a remote-tracking branch?
-    remote=${$(git rev-parse --verify ${hook_com[branch_orig]}@{upstream} \
-        --symbolic-full-name 2>/dev/null)/refs\/remotes\/}
+    # do we have a remote-tracking branch?
+    local remote=$(git rev-parse --verify ${hook_com[branch_orig]}@{upstream} --symbolic-full-name 2>/dev/null)
 
     # The first test will show a tracking branch whenever there is one. The
     # second test, however, will only show the remote branch's name if it
@@ -297,9 +292,15 @@ function +vi-git-remotebranch() {
     #if [[ -n ${remote} && ${remote#*/} != ${hook_com[branch]} ]] ; then
         #hook_com[branch]="${hook_com[branch]} [${remote}]"
         #hook_com[branch]="${hook_com[branch]}:${remote}"
-        user_data[remote_full]="$remote"
-        user_data[remote_origin]="${remote%%/*}"
-        user_data[remote_branch]="${remote#*/}"
+
+        # remotes/origin/topic/foo
+        user_data[remote_ref]="$remote"
+        # remotes/origin/topic/foo
+        user_data[remote_full]="${remote#refs/remotes/}"
+        # remotes/origin/topic/foo
+        user_data[remote_origin]="${user_data[remote_full]%%/*}"
+        # remotes/origin/topic/foo
+        user_data[remote_branch]="${user_data[remote_full]#*/}"
     fi
 
     ret=0
