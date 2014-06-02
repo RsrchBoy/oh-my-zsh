@@ -5,7 +5,7 @@
 #   agnoster
 
 # XXX ???
-autoload colors
+autoload -U colors
 colors
 
 autoload -U add-zsh-hook
@@ -157,7 +157,7 @@ prompt_end() {
 
 #*
 
-## zsh hook definitions
+## zsh hook definitions {{{2
 
 add-zsh-hook precmd vcs_info
 #add-zsh-hook chpwd  vcs_info
@@ -187,7 +187,7 @@ function tmux_pane_title {
 
 autoload -Uz vcs_info
 
-### vcs styles {{{
+### vcs styles {{{2
 
 zstyle ':vcs_info:*' enable git hg bzr
 zstyle ':vcs_info:*' max-exports 4
@@ -207,7 +207,8 @@ zstyle ':vcs_info:*' formats       \
     '%r' \
     "$iDESC %m" \
     " %b" \
-    "$iREPO %%B%S/%%b"
+    "$iREPO %S"
+    #"$iREPO %%B%S/%%b"
 zstyle ':vcs_info:*' actionformats '%r %b %u%c %i %s %a'
 #zstyle ':vcs_info:git+set-branch-format:*'
 
@@ -266,7 +267,7 @@ function +vi-git-remotebranch() {
     local config="$(git config --get-regexp 'remote\..+\.url')"
 
     # now, take it and create an associative array of remotename => provider
-    # (??) 
+    # (??)
 
 }
 
