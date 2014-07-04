@@ -51,8 +51,8 @@ iJOB="\u${CODEPOINT_OF_AWESOME_COG}"
 iJOBS="\u${CODEPOINT_OF_AWESOME_COGS}"
 iROOT="\u${CODEPOINT_OF_AWESOME_EXCLAMATION_SIGN}"
 #iDESC="\u${CODEPOINT_OF_AWESOME_HDD}"
-#iDESC="\u${CODEPOINT_OF_AWESOME_TAGS}"
-iDESC="\u${CODEPOINT_OF_AWESOME_TAGS} "
+#iDESC="\u${CODEPOINT_OF_AWESOME_TAGS} "
+iDESC="\u${CODEPOINT_OF_OCTICONS_LOCATION}"
 #iSEP="\u${CODEPOINT_OF_AWESOME_ARROW_RIGHT}"
 #iSEP="\u${CODEPOINT_OF_AWESOME_CHEVRON_RIGHT}"
 #iSEP="\u${CODEPOINT_OF_AWESOME_CHEVRON_SIGN_RIGHT}"
@@ -206,7 +206,7 @@ zstyle ':vcs_info:git:*' unstagedstr ""
 # 3: workdir, vcs symbol, local dir
 zstyle ':vcs_info:*' formats       \
     '%r' \
-    "$iDESC %m" \
+    '%m' \
     " %b" \
     "$iREPO %S"
     #"$iREPO %%B%S/%%b"
@@ -415,7 +415,7 @@ function build_prompt() {
   #local rbenv="${rbenv:-system (global)}"
   prompt_rubyenv
   # local goes here
-  prompt_segment black yellow  "${vcs_info_msg_1_}"
+  prompt_segment black yellow  "${vcs_info_msg_1_:+$iDESC }${vcs_info_msg_1_#heads/}"
   # FIXME rbenv segment is **too slow!**
   #prompt_segment black blue "$(rbenv_prompt_info)"
   prompt_virtualenv
