@@ -110,7 +110,8 @@ SEGMENT_SEPARATOR_END=" "
 
 ### Perl vars
 
-ZSH_THEME_PERL_PROMPT_PREFIX="$iPERL  "
+#ZSH_THEME_PERL_PROMPT_PREFIX="$iPERL "
+ZSH_THEME_PERL_PROMPT_PREFIX=""
 ZSH_THEME_PERL_PROMPT_SUFFIX=""
 ZSH_THEME_PERL_PROMPT_SYSTEM_PERL="system perl"
 ZSH_THEME_PERL_PROMPT_LIB_SYMBOL="@"
@@ -408,7 +409,7 @@ function build_prompt() {
   prompt_segment black magenta "${vcs_info_msg_0_}"
   prompt_segment black blue    "${vcs_info_msg_2_}"
   prompt_segment black white   "$iPOWER $POWER_SUPPLY_CAPACITY%%"
-  prompt_segment black green   "$(perl_prompt_info)"
+  prompt_segment black green   "$iPERL  ${$(perl_prompt_info)#perl-}"
   #prompt_segment black magenta "ruby: ${$(<~/.rbenv/version):-system}"
   #local rbenv="${$(<~/.rbenv/version):-system (global)}"
   #local rbenv="${rbenv:-system (global)}"
