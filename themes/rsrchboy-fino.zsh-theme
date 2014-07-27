@@ -50,6 +50,7 @@ iFROWN="\u${CODEPOINT_OF_AWESOME_FROWN}"
 iJOB="\u${CODEPOINT_OF_AWESOME_COG}"
 iJOBS="\u${CODEPOINT_OF_AWESOME_COGS}"
 iROOT="\u${CODEPOINT_OF_AWESOME_EXCLAMATION_SIGN}"
+#iROOT="\u${CODEPOINT_OF_OCTICONS_ALERT}"
 #iDESC="\u${CODEPOINT_OF_AWESOME_HDD}"
 #iDESC="\u${CODEPOINT_OF_AWESOME_TAGS} "
 iDESC="\u${CODEPOINT_OF_OCTICONS_LOCATION}"
@@ -362,11 +363,14 @@ function +vi-git-assemble() {
 
 ### Context: user@hostname (who am I and where am I) {{{2
 function prompt_context() {
-  local user=`whoami`
 
+  # FIXME get rid of this external command!
+  local user=`whoami`
   if [[ "$user" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
     #prompt_segment black default "%(!.%{%F{yellow}%}.)$user@%m"
-    prompt_segment black default "%(!.%{%F{yellow}%}.)$user@%m"
+    #prompt_segment black default "%(!.%{%F{yellow}%}.)$user@%m"
+    prompt_segment black red "%(!.$iROOT .)%n@%m"
+    #prompt_segment black red "%n@%m (%y)"
   fi
 }
 
