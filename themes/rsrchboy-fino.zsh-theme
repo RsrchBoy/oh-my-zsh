@@ -201,6 +201,9 @@ zstyle ':vcs_info:*' stagedstr "%{$fg[green]%}✚%{$reset_color%}"
 #zstyle ':vcs_info:git:*' unstagedstr "%{$fg[red]%}✘%{$reset_color%}"
 zstyle ':vcs_info:git:*' unstagedstr ""
 
+# disable vcs_info on our git-annex repos
+zstyle ':vcs_info:*' disable-patterns "$HOME/(|Desktop/)annex(|/*)"
+
 # 0: repo workdir root
 # 1: HEAD 'git describe ...'
 # 2: detailed branch origin/tracking/ahead/behind/etc
