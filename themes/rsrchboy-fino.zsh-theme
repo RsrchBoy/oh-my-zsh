@@ -369,7 +369,7 @@ function prompt_context() {
 
   # FIXME get rid of this external command!
   local user=`whoami`
-  if [[ "$user" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+  if [[ "$user" != "$DEFAULT_USER" || -n "$SSH_CLIENT" || -n "$SSH_CONNECTION" ]]; then
     #prompt_segment black default "%(!.%{%F{yellow}%}.)$user@%m"
     #prompt_segment black default "%(!.%{%F{yellow}%}.)$user@%m"
     prompt_segment black red "%(!.$iROOT .)%n@%m"
