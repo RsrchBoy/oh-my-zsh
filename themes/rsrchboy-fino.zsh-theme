@@ -47,7 +47,8 @@ GIT_GIT_SYMBOL="\u${CODEPOINT_OF_OCTICONS_GIT_BRANCH}"
 
 iGITHUB="\u${CODEPOINT_OF_AWESOME_GITHUB}"
 iFROWN="\u${CODEPOINT_OF_AWESOME_FROWN}"
-iJOB="\u${CODEPOINT_OF_AWESOME_COG}"
+# iJOB="\u${CODEPOINT_OF_AWESOME_COG}"
+iJOB="J"
 iJOBS="\u${CODEPOINT_OF_AWESOME_COGS}"
 iROOT="\u${CODEPOINT_OF_AWESOME_EXCLAMATION_SIGN}"
 #iROOT="\u${CODEPOINT_OF_OCTICONS_ALERT}"
@@ -69,10 +70,6 @@ iRUBY="\u${CODEPOINT_OF_OCTICONS_RUBY}"
 
 iSUFFIX="\u${CODEPOINT_OF_AWESOME_DOUBLE_ANGLE_RIGHT}"
 
-# sooo lazy...
-iA=$SEGMENT_SEPARATOR_BEGIN
-iZ="%{%F{default}%}$SEGMENT_SEPARATOR_END"
-
 ### segment vars {{{
 
 CURRENT_BG='NONE'
@@ -81,6 +78,10 @@ local tween_color="$FG[239]"
 #SEGMENT_SEPARATOR_BEGIN="➜ "
 SEGMENT_SEPARATOR_BEGIN="$iSEP "
 SEGMENT_SEPARATOR_END=" "
+
+# sooo lazy...
+iA=$SEGMENT_SEPARATOR_BEGIN
+iZ="%{%F{default}%}$SEGMENT_SEPARATOR_END"
 
 ### git vars
 #
@@ -174,7 +175,8 @@ add-zsh-hook precmd  tmux_pane_title
 # zsh hook attached above
 
 function tmux_pane_title {
-    local title="${vcs_info_msg_0_:-${PWD/#$HOME/~}}$vcs_info_msg_3_"
+    # local title="${vcs_info_msg_0_:-${PWD/#$HOME/~}}$vcs_info_msg_3_"
+    local title="zsh: ${PWD/#$HOME/~}"
 
     if [ $1 ] ; then
         title+=": ${1%% *}"
@@ -432,9 +434,12 @@ function build_prompt() {
   echo -n "╰"
 
   prompt_segment black 226 "${vcs_info_msg_3_:-%B${PWD/#$HOME/~}%b}"
-  echo -n                  "%(1j.$iA%{%F{cyan}%}${iJOB}%(2j. x%j.)$iZ.)"
-  echo -n                  "$iA%(?.%{%F{green}%}$iOK.%{%F{red}%}$iFROWN)$iZ"
-  echo -n "%B%(!.%{%F{red}%}.) $iSUFFIX%b%{%f%} "
+  # echo -n                  "%(1j.$iA%{%F{cyan}%}${iJOB}%(2j. x%j.)$iZ.)"
+  echo -n                  "%(1j.$iA%{%F{cyan}%}${iJOB}%(2j.x%j.)$iZ.)"
+  # echo -n                  "$iA%(?.%{%F{green}%}$iOK.%{%F{red}%}$iFROWN)$iZ"
+  echo -n                  "$iA%(?.%{%F{green}%}.%{%F{red}%}X)$iZ"
+  echo -n "%B%(!.%{%F{red}%}#.$)%b%{%f%} "
+  # echo -n "%B%(!.%{%F{red}%}.) $iSUFFIX%b%{%f%} "
 }
 
 function build_rprompt() {
