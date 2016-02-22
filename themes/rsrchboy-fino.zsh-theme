@@ -175,6 +175,9 @@ add-zsh-hook precmd  tmux_pane_title
 # zsh hook attached above
 
 function tmux_pane_title {
+
+    [ -z $TMUX ] && return
+
     # local title="${vcs_info_msg_0_:-${PWD/#$HOME/~}}$vcs_info_msg_3_"
     local title="zsh: ${PWD/#$HOME/~}"
 
